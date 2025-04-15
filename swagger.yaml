@@ -1,0 +1,256 @@
+openapi: 3.0.0
+info:
+  title: SecNode Mobile Security Analysis Backend API
+  version: "1.0.0"
+  description: API documentation for the SecNode Mobile Security Analysis Backend.
+servers:
+  - url: http://localhost:7000/api/v1
+paths:
+  /apk-scan:
+    post:
+      summary: Upload and scan an APK file.
+      description: >
+        Uploads and scans an APK file. If the APK has already been scanned,
+        it will not scan again unless `re_scan` is set to "1".
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The APK file to be scanned.
+                re_scan:
+                  type: string
+                  description: Set "1" to force a re-scan.
+                  example: "0"
+      responses:
+        "200":
+          description: Successful scan.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Scan data saved successfully"
+                  apk_scan_parent_id:
+                    type: string
+                    example: "8f14e45f-e876-4aa2-8f3a-dfd64d446bf0"
+  /apk-binary-analysis-warning:
+    get:
+      summary: Retrieve binary analysis warnings.
+      description: Retrieves binary analysis warnings generated from the APK scan.
+      responses:
+        "200":
+          description: A list of binary analysis warnings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    apk_scan_parent_id:
+                      type: string
+                      example: "8f14e45f-e876-4aa2-8f3a-dfd64d446bf0"
+                    name:
+                      type: string
+                      example: "Buffer Overflow"
+                    stack_canary:
+                      type: string
+                      example: "Enabled"
+                    severity:
+                      type: string
+                      example: "High"
+                    created_at:
+                      type: string
+                      format: date-time
+                      example: "2023-08-01T12:00:00Z"
+  /apk-code-analysis-issues:
+    get:
+      summary: Retrieve code analysis issues.
+      description: Retrieves code analysis issues identified during the APK scan.
+      responses:
+        "200":
+          description: A list of code analysis issues.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    apk_scan_parent_id:
+                      type: string
+                      example: "8f14e45f-e876-4aa2-8f3a-dfd64d446bf0"
+                    section:
+                      type: string
+                      example: "Input Validation"
+                    description:
+                      type: string
+                      example: "Potential SQL injection vulnerability"
+                    severity:
+                      type: string
+                      example: "Critical"
+                    file_name:
+                      type: string
+                      example: "https://callmesidhu.github.io/Nodejs-SecNode-MSA-backend/storage/8f14e45f-e876-4aa2-8f3a-dfd64d446bf0/vulnerable.java"
+                    created_at:
+                      type: string
+                      format: date-time
+                      example: "2023-08-01T12:01:00Z"
+  /apk-manifest-findings:
+    get:
+      summary: Retrieve manifest findings.
+      description: Retrieves manifest findings from the APK scan.
+      responses:
+        "200":
+          description: A list of manifest findings.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    apk_scan_parent_id:
+                      type: string
+                      example: "8f14e45f-e876-4aa2-8f3a-dfd64d446bf0"
+                    severity:
+                      type: string
+                      example: "Medium"
+                    title:
+                      type: string
+                      example: "Debuggable Flag"
+                    description:
+                      type: string
+                      example: "The APK has debuggable flag enabled which could be a security risk."
+                    created_at:
+                      type: string
+                      format: date-time
+                      example: "2023-08-01T12:02:00Z"
+  /apk-network-security-issues:
+    get:
+      summary: Retrieve network security issues.
+      description: Retrieves network security issues detected during the APK scan.
+      responses:
+        "200":
+          description: A list of network security issues.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    apk_scan_parent_id:
+                      type: string
+                      example: "8f14e45f-e876-4aa2-8f3a-dfd64d446bf0"
+                    severity:
+                      type: string
+                      example: "High"
+                    description:
+                      type: string
+                      example: "Insecure network connection configuration."
+                    created_at:
+                      type: string
+                      format: date-time
+                      example: "2023-08-01T12:03:00Z"
+  /apk-scan-summary:
+    get:
+      summary: Retrieve scan summary.
+      description: Returns the scan summary information.
+      responses:
+        "200":
+          description: A list of scan summaries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    apk_scan_parent_id:
+                      type: string
+                      example: "8f14e45f-e876-4aa2-8f3a-dfd64d446bf0"
+                    manifest_high:
+                      type: integer
+                      example: 2
+                    manifest_warning:
+                      type: integer
+                      example: 1
+                    network_high:
+                      type: integer
+                      example: 1
+                    network_warning:
+                      type: integer
+                      example: 0
+                    code_high:
+                      type: integer
+                      example: 3
+                    code_warning:
+                      type: integer
+                      example: 1
+                    created_at:
+                      type: string
+                      format: date-time
+                      example: "2023-08-01T12:04:00Z"
+  /apk-scan-parent:
+    get:
+      summary: Retrieve scanned APK parent data.
+      description: Returns a list of APK scan parent entries.
+      responses:
+        "200":
+          description: A list of scanned APK metadata.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    uuid:
+                      type: string
+                      example: "bbd0848d-565f-438c-a0c3-455eda0d649f"
+                    app_name:
+                      type: string
+                      example: "DamnVulnerableBank"
+                    file_name:
+                      type: string
+                      example: "dvba_v1.1.0.apk"
+                    hash:
+                      type: string
+                      example: "5b40b49cd80dbe20ba611d32045b57c6"
+                    version_name:
+                      type: string
+                      example: "1.0"
+                    security_score:
+                      type: string
+                      example: "44"
+                    created_at:
+                      type: string
+                      format: date-time
+                      example: "2025-04-11T05:30:13.140Z"

@@ -1,0 +1,216 @@
+{
+        "manifest_findings": [
+            {
+                "severity": "high",
+                "title": "App can be installed on a vulnerable upatched Android versionAndroid 5.0-5.0.2, [minSdk=21]",
+                "description": "This application can be installed on an older version of android that has multiple unfixed vulnerabilities. These devices won't receive reasonable security updates from Google. Support an Android version => 10, API 29 to receive reasonable security updates."
+            },
+            {
+                "severity": "high",
+                "title": "Clear text traffic is Enabled For App[android:usesCleartextTraffic=true]",
+                "description": "The app intends to use cleartext network traffic, such as cleartext HTTP, FTP stacks, DownloadManager, and MediaPlayer. The default value for apps that target API level 27 or lower is \"true\". Apps that target API level 28 or higher default to \"false\". The key reason for avoiding cleartext traffic is the lack of confidentiality, authenticity, and protections against tampering; a network attacker can eavesdrop on transmitted data and also modify it without being detected."
+            },
+            {
+                "severity": "info",
+                "title": "App has a Network Security Configuration[android:networkSecurityConfig=@xml/network_security_config]",
+                "description": "The Network Security Configuration feature lets apps customize their network security settings in a safe, declarative configuration file without modifying app code. These settings can be configured for specific domains and for a specific app. "
+            },
+            {
+                "severity": "warning",
+                "title": "Application Data can be Backed up[android:allowBackup=true]",
+                "description": "This flag allows anyone to backup your application data via adb. It allows users who have enabled USB debugging to copy application data off of the device."
+            },
+            {
+                "severity": "high",
+                "title": "App Link assetlinks.json file not found[android:name=com.app.damnvulnerablebank.CurrencyRates][android:host=http://xe.com]",
+                "description": "App Link asset verification URL (http://xe.com/.well-known/assetlinks.json) not found or configured incorrectly. (Status Code: 301). App Links allow users to redirect from a web URL/email to the mobile app. If this file is missing or incorrectly configured for the App Link host/domain, a malicious app can hijack such URLs. This may lead to phishing attacks, leak sensitive data in the URI, such as PII, OAuth tokens, magic link/password reset tokens and more. You must verify the App Link domain by hosting the assetlinks.json file and enabling verification via [android:autoVerify=\"true\"] in the Activity intent-filter."
+            },
+            {
+                "severity": "high",
+                "title": "App Link assetlinks.json file not found[android:name=com.app.damnvulnerablebank.CurrencyRates][android:host=https://xe.com]",
+                "description": "App Link asset verification URL (https://xe.com/.well-known/assetlinks.json) not found or configured incorrectly. (Status Code: 301). App Links allow users to redirect from a web URL/email to the mobile app. If this file is missing or incorrectly configured for the App Link host/domain, a malicious app can hijack such URLs. This may lead to phishing attacks, leak sensitive data in the URI, such as PII, OAuth tokens, magic link/password reset tokens and more. You must verify the App Link domain by hosting the assetlinks.json file and enabling verification via [android:autoVerify=\"true\"] in the Activity intent-filter."
+            },
+            {
+                "severity": "warning",
+                "title": "Activity (com.app.damnvulnerablebank.CurrencyRates) is not Protected.An intent-filter exists.",
+                "description": "An Activity is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. The presence of intent-filter indicates that the Activity is explicitly exported."
+            },
+            {
+                "severity": "warning",
+                "title": "Activity (com.app.damnvulnerablebank.SendMoney) is not Protected. [android:exported=true]",
+                "description": "An Activity is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device."
+            },
+            {
+                "severity": "warning",
+                "title": "Activity (com.app.damnvulnerablebank.ViewBalance) is not Protected. [android:exported=true]",
+                "description": "An Activity is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device."
+            },
+            {
+                "severity": "warning",
+                "title": "Activity (androidx.biometric.DeviceCredentialHandlerActivity) is not Protected. [android:exported=true]",
+                "description": "An Activity is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device."
+            },
+            {
+                "severity": "warning",
+                "title": "Activity (com.google.firebase.auth.internal.FederatedSignInActivity) is Protected by a permission, but the protection level of the permission should be checked.Permission: com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN [android:exported=true]",
+                "description": "An Activity is found to be shared with other apps on the device therefore leaving it accessible to any other application on the device. It is protected by a permission which is not defined in the analysed application. As a result, the protection level of the permission should be checked where it is defined. If it is set to normal or dangerous, a malicious application can request and obtain the permission and interact with the component. If it is set to signature, only applications signed with the same certificate can obtain the permission."
+            }
+        ],
+        "network_security_issues": [
+            {
+                "severity": "high",
+                "description": "Base config is insecurely configured to permit clear text traffic to all domains."
+            },
+            {
+                "severity": "high",
+                "description": "Base config is configured to trust user installed certificates."
+            },
+            {
+                "severity": "warning",
+                "description": "Base config is configured to trust system certificates."
+            }
+        ],
+        "binary_analysis_warnings": [
+            {
+                "name": "apktool_out/lib/x86_64/libtool-checker.so",
+                "stack_canary": "This binary does not have a stack canary value added to the stack. Stack canaries are used to detect and prevent exploits from overwriting return address. Use the option -fstack-protector-all to enable stack canaries. Not applicable for Dart/Flutter libraries unless Dart FFI is used.",
+                "severity": "high"
+            },
+            {
+                "name": "apktool_out/lib/arm64-v8a/libtool-checker.so",
+                "stack_canary": "This binary does not have a stack canary value added to the stack. Stack canaries are used to detect and prevent exploits from overwriting return address. Use the option -fstack-protector-all to enable stack canaries. Not applicable for Dart/Flutter libraries unless Dart FFI is used.",
+                "severity": "high"
+            },
+            {
+                "name": "lib/x86_64/libtool-checker.so",
+                "stack_canary": "This binary does not have a stack canary value added to the stack. Stack canaries are used to detect and prevent exploits from overwriting return address. Use the option -fstack-protector-all to enable stack canaries. Not applicable for Dart/Flutter libraries unless Dart FFI is used.",
+                "severity": "high"
+            },
+            {
+                "name": "lib/arm64-v8a/libtool-checker.so",
+                "stack_canary": "This binary does not have a stack canary value added to the stack. Stack canaries are used to detect and prevent exploits from overwriting return address. Use the option -fstack-protector-all to enable stack canaries. Not applicable for Dart/Flutter libraries unless Dart FFI is used.",
+                "severity": "high"
+            }
+        ],
+        "code_analysis_issues": [
+            {
+                "section": "ANDROID LOGGING",
+                "files": [
+                    "a/a/a/a/a.java",
+                    "b/b/k/h.java",
+                    "b/b/k/k.java",
+                    "b/b/k/r.java",
+                    "b/b/k/t.java",
+                    "b/b/l/a/a.java",
+                    "b/b/o/f.java",
+                    "b/b/o/i/d.java",
+                    "b/b/o/i/g.java",
+                    "b/b/p/a0.java",
+                    "b/b/p/a1.java",
+                    "b/b/p/d1.java",
+                    "b/b/p/k0.java",
+                    "b/b/p/m0.java",
+                    "b/b/p/n0.java",
+                    "b/b/p/r0.java",
+                    "b/b/p/s0.java",
+                    "b/b/p/w.java",
+                    "b/b/p/z0.java",
+                    "b/d/a.java",
+                    "b/d/c.java",
+                    "b/d/e.java",
+                    "b/g/c/c.java",
+                    "b/g/c/d.java",
+                    "b/g/c/e.java",
+                    "b/i/d/b.java",
+                    "b/i/d/c.java",
+                    "b/i/d/e.java",
+                    "b/i/f/c.java",
+                    "b/i/f/d.java",
+                    "b/i/f/e.java",
+                    "b/i/f/f.java",
+                    "b/i/f/g.java",
+                    "b/i/f/k/d.java",
+                    "b/i/g/a/a.java",
+                    "b/i/i/b.java",
+                    "b/i/l/a.java",
+                    "b/i/m/a.java",
+                    "b/i/m/b.java",
+                    "b/i/m/f.java",
+                    "b/i/m/l.java",
+                    "b/i/m/p.java",
+                    "b/i/m/u.java",
+                    "b/j/a/b.java",
+                    "b/k/b/e.java",
+                    "b/l/a/e.java",
+                    "b/l/a/k.java",
+                    "b/p/a/a.java",
+                    "b/t/b0.java",
+                    "b/u/a/a/f.java",
+                    "c/a/b/j.java",
+                    "c/a/b/v.java",
+                    "c/a/b/w/h.java",
+                    "c/b/a/j.java",
+                    "c/b/a/n.java",
+                    "c/c/a/a/c/d.java",
+                    "c/c/a/a/c/g.java",
+                    "c/c/a/a/c/h.java",
+                    "c/c/a/a/c/k/k/b0.java",
+                    "c/c/a/a/c/k/k/d.java",
+                    "c/c/a/a/c/k/k/u.java",
+                    "c/c/a/a/c/l/a.java",
+                    "c/c/a/a/c/l/b.java",
+                    "c/c/a/a/c/l/d.java",
+                    "c/c/a/a/c/l/d0.java",
+                    "c/c/a/a/c/l/e.java",
+                    "c/c/a/a/c/l/e0.java",
+                    "c/c/a/a/c/l/i.java",
+                    "c/c/a/a/c/l/l.java",
+                    "c/c/a/a/c/m/a.java",
+                    "c/c/a/a/c/t.java",
+                    "c/c/a/a/f/c/a1.java",
+                    "c/c/a/a/g/b/a.java",
+                    "c/c/a/b/a0/b.java",
+                    "c/c/a/b/b0/a.java",
+                    "c/c/a/b/l/g.java",
+                    "c/c/b/b.java",
+                    "c/c/b/h/c0/a/e.java",
+                    "c/c/b/h/c0/a/j0.java",
+                    "c/c/b/h/c0/a/k0.java",
+                    "c/c/b/h/c0/a/x0.java",
+                    "c/c/b/h/d0/i.java",
+                    "c/c/b/h/d0/k.java",
+                    "c/c/b/h/d0/p.java",
+                    "c/c/b/h/d0/z.java",
+                    "c/c/b/h/y.java",
+                    "com/app/damnvulnerablebank/BankLogin.java",
+                    "com/app/damnvulnerablebank/MainActivity.java"
+                ],
+                "description": "The App logs information. Sensitive information should never be logged.",
+                "severity": "info"
+            },
+            {
+                "section": "ANDROID READ WRITE EXTERNAL",
+                "files": [
+                    "com/app/damnvulnerablebank/MainActivity.java"
+                ],
+                "description": "App can read/write to External Storage. Any App can read data written to External Storage.",
+                "severity": "warning"
+            },
+            {
+                "section": "ANDROID DETECT ROOT",
+                "files": [
+                    "a/a/a/a/a.java"
+                ],
+                "description": "This App may have root detection capabilities.",
+                "severity": "good"
+            }
+        ],
+        "summary": {
+            "manifest_high": 4,
+            "manifest_warning": 6,
+            "network_high": 2,
+            "network_warning": 1,
+            "code_high": 0,
+            "code_warning": 1
+        }
+    }
